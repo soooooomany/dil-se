@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Dil Se Bakery",
   description: "Artisanal baked goods made with love",
   keywords: ["bakery", "cakes", "pastries", "bread", "desserts"],
-  url: "https://dilse-bakery.vercel.app",
+  url: "http://localhost:3000",
   links: {
     twitter: "https://twitter.com/dilsebakery",
     instagram: "https://instagram.com/dilsebakery",
