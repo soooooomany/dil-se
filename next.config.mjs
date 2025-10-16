@@ -2,16 +2,19 @@
 const nextConfig = {
   images: {
     domains: ['images.unsplash.com'],
+    unoptimized: process.env.NODE_ENV === 'development'
   },
   typescript: {
     ignoreBuildErrors: true,
   },
   experimental: {
-    optimizeCss: false,
+    optimizeCss: true,
   },
-  // Set output to standalone for better compatibility
-  output: 'standalone',
-  distDir: '.next'
+  // Production optimizations
+  compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  swcMinify: true
 }
 
 export default nextConfig;

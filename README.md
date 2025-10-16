@@ -1,23 +1,61 @@
 # Dil Se - Artisan Bakery E-commerce
 
-A modern e-commerce platform for an artisan bakery built with Next.js 14+.
+A modern e-commerce platform for an artisan bakery built with Next.js 14+. Experience the warmth of freshly baked goods through our digital storefront.
 
 ## Tech Stack
 
-- **Framework**: Next.js 14+ (App Router)
-- **Styling**: Tailwind CSS, shadcn/ui
-- **State Management**: Zustand
-- **Authentication**: NextAuth.js with Prisma adapter
-- **Database**: PostgreSQL with Prisma ORM
-- **Animation**: Framer Motion
-- **Testing**: Vitest, Playwright, Testing Library
-- **Deployment**: Vercel
+- **Framework**: Next.js 14+ with App Router
+- **Styling**: Tailwind CSS
+- **Database**: PostgreSQL (Direct connection)
+- **Authentication**: NextAuth.js
+- **State Management**: Server Actions + Client State
+- **Environment**: Bun for enhanced performance
 
 ## Features
 
-- Modern, responsive design with custom bakery theme
-- Real-time product filtering and sorting
-- Shopping cart with persistence
+- Modern, responsive design
+- Product catalog with categories
+- Shopping cart functionality
+- User authentication
+- Order management
+- Admin dashboard
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/dil-se.git
+   cd dil-se
+   ```
+
+2. Install dependencies:
+   ```bash
+   bun install
+   ```
+
+3. Set up the database:
+   ```bash
+   # Create the database and tables
+   psql -U postgres -f src/db/schema.sql
+   ```
+
+4. Create a `.env` file:
+   ```env
+   DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/dilse"
+   NEXTAUTH_URL="http://localhost:3000"
+   NEXTAUTH_SECRET="your-secret-key"
+   ```
+
+5. Start the development server:
+   ```bash
+   bun run dev
+   ```
+
+## Prerequisites
+
+- Node.js 18+ (or Bun 1.0+)
+- PostgreSQL 15+
+- Git
 - User authentication and order management
 - Admin dashboard for product and order management
 - Animations and micro-interactions
