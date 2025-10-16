@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import prisma from "@/lib/prisma"
+import db from "@/lib/db"
 import { cartItemSchema } from "@/lib/validations"
 
 // GET /api/cart - Get user's cart
@@ -16,16 +16,28 @@ export async function GET(req: Request) {
       )
     }
 
-    const cart = await prisma.cart.findUnique({
-      where: { userId: session.user.id },
-      include: {
-        items: {
-          include: {
-            product: true,
-          },
-        },
-      },
-    })
+    // Get cart with items and products
+    const cart = await db.query(`
+      SELECT c.*, 
+             json_agg(
+               json_build_object(
+                 'id', ci.id,
+                 'quantity', ci.quantity,
+                 'product', json_build_object(
+                   'id', p.id,
+                   'name', p.name,
+                   'price', p.price,
+                   'image_url', p.image_url,
+                   'description', p.description
+                 )
+               )
+             ) as items
+      FROM carts c
+      LEFT JOIN cart_items ci ON c.id = ci.cart_id
+      LEFT JOIN products p ON ci.product_id = p.id
+      WHERE c.user_id = $1
+      GROUP BY c.id
+    `, [session.user.id])
 
     if (!cart) {
       return NextResponse.json({ items: [] })
